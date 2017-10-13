@@ -1,8 +1,5 @@
-from flask import Flask
+from app import create_app
+from config import config
 
-app = Flask(__name__)
 
-
-@app.route('/')
-def home():
-    return 'Hello world!'
+app = create_app(config)
