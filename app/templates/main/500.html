@@ -1,3 +1,27 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ context['title'] }}{% endblock %}
+
+{% block back_ground_image %}
+url({{ url_for('static', filename='img/home-bg.jpg') }})
+{% endblock %}
+
+{% block site_heading %}
+<div class="site-heading">
+    <h1>Clean Blog</h1>
+    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h2>Server Error</h2>
+            <p>Well, this is unexpected...</p>
+            <p>Try going to our to <a href="{{ url_for('main.home')}}">home page</a></p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
