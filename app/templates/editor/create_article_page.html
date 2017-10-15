@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ context['title'] }}{% endblock %}
+
+{% block back_ground_image %}
+url({{ url_for('static', filename='img/home-bg.jpg') }})
+{% endblock %}
+
+{% block site_heading %}
+<div class="site-heading">
+    <h1>{{ blog_config['BLOG_TITLE_LINE_1'] }}</h1>
+    <span class="subheading">{{ blog_config['BLOG_TITLE_LINE_2'] }}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mx-auto">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form" method="POST" action="{{ url_for('editor.create_article') }}">
+
+                        {% for item in form %}
+                        {{ item(class_='form-control', placeholder=item.label.text) }}
+                        {% endfor %}
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

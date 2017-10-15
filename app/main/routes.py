@@ -1,6 +1,7 @@
 from . import app
 from flask import render_template
 from config import blog_config
+from app.models import Article
 
 
 @app.route('/')
@@ -10,7 +11,10 @@ def home():
         'title': 'Clean Blog - Start Bootstrap Theme',
     }
 
-    return render_template('main/home_page.html', context=context, blog_config=blog_config)
+    q = Article.query().order(-Article.created)
+    posts = q.fetch()
+
+    return render_template('main/home_page.html', context=context, blog_config=blog_config, posts=posts)
 
 
 @app.route('about/')

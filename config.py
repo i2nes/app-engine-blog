@@ -14,6 +14,8 @@ blog_config = {
     'BLOG_TITLE_LINE_1': 'Clean Blog',
     'BLOG_TITLE_LINE_2': 'A Blog Theme by Start Bootstrap',
     'COPYRIGHT': 'Your Website 2017',
+    'POST_AUTHOR': 'Start Bootstrap',
+    'POST_AUTHOR_LINK': '#',
 
     # Comment out any social links you don't want to display
     'FACEBOOK_LINK': 'https://www.facebook.com/',
