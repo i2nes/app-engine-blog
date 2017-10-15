@@ -8,8 +8,8 @@ url({{ url_for('static', filename='img/home-bg.jpg') }})
 
 {% block site_heading %}
 <div class="site-heading">
-    <h1>Clean Blog</h1>
-    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+    <h1>{{ blog_config['BLOG_TITLE_LINE_1'] }}</h1>
+    <span class="subheading">{{ blog_config['BLOG_TITLE_LINE_2'] }}</span>
 </div>
 {% endblock %}
 
