@@ -20,7 +20,6 @@ def create_article():
         new_article.slug = form.slug.data
         new_article.content = form.content.data
         new_article.published = True if form.status.data == 'published' else False
-        new_article.isPost = True if form.page_type.data == 'post' else False
 
         new_article.put()
 
