@@ -1,3 +1,6 @@
+# Before uploading to app engine you must setup your own
+# Blog Configurations and SECRET_KEY
+# Then save and rename this file to config.py
 import os
 
 # Flask App Configurations
@@ -27,6 +30,7 @@ blog_config = {
     # Only these users will be able to access /editor for editing posts
     'EDITOR_ACCESS_LIST': {
         'email1@gmail.com': 'John Doe',
+        'email2@gmail.com': 'Jane Doe',
     }
 
 }
