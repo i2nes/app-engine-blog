@@ -47,6 +47,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a>
                 </li>
+                {% if context['logout_url'] %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ context['logout_url'] }}">Logout</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ context['title'] }}{% endblock %}
+
+{% block back_ground_image %}
+url({{ url_for('static', filename='img/home-bg.jpg') }})
+{% endblock %}
+
+{% block site_heading %}
+<div class="site-heading">
+    <h1>{{ blog_config['BLOG_TITLE_LINE_1'] }}</h1>
+    <span class="subheading">{{ blog_config['BLOG_TITLE_LINE_2'] }}</span>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

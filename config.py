@@ -23,4 +23,11 @@ blog_config = {
     'TWITTER_LINK': 'https://twitter.com/',
     'GITHUB_LINK': 'https://github.com/i2nes/app-engine-blog',
 
+    # Authorized Gmail Accounts
+    # Only these users will be able to access /editor for editing posts
+    'EDITOR_ACCESS_LIST': {
+        'email1@gmail.com': 'John Doe',
+        'email2@gmail.com': 'Jane Doe',
+    }
+
 }

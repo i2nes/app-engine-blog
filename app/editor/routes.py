@@ -1,14 +1,61 @@
 from . import app
 from flask import render_template, url_for, redirect
-from config import blog_config
+from config import blog_config, config
 from forms import CreateArticleLoginForm
 from app.models import Article
+from functools import wraps
+from google.appengine.api import users
+from socket import gethostname
+
+# Functions
+
+def login_required(f):
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = users.get_current_user()
+        if user is None:
+            return redirect(users.create_login_url(url_for('editor.home')))  # Go to login page
+        elif user.email() in [email for email in blog_config['EDITOR_ACCESS_LIST']]:
+            return f(*args, **kwargs)
+        else:
+            return redirect(users.create_login_url(url_for('main.home')))
+
+    return decorated_function
+
+
+def logout_url():
+    # Fix for logout. Googles create_logout_url api logs the user out of all
+    # his google accounts, instead of only logging out of our app.
+    # https://bugs.chromium.org/p/chromium/issues/detail?id=162590
+    # In DEV we can use create_logout_url in Prod we have to hack the url
+    if config['DEBUG']:
+        logout = users.create_logout_url(url_for('main.home'))
+    else:
+        logout = '/_ah/logout?continue=https://' + gethostname() + '/'
+    return logout
+
+
+# Editor Routes
+
+@app.route('/')
+@login_required
+def home():
+
+    context = {
+        'logout_url': logout_url(),
+    }
+
+    return render_template('editor/home_page.html', context=context, blog_config=blog_config)
 
 
 @app.route('/create', methods=['GET', 'POST'])
+@login_required
 def create_article():
 
-    context = {}
+    context = {
+        'logout_url': logout_url(),
+    }
 
     form = CreateArticleLoginForm()
     if form.validate_on_submit():
@@ -29,3 +76,4 @@ def create_article():
         pass
 
     return render_template('editor/create_article_page.html', context=context, form=form, blog_config=blog_config)
+
