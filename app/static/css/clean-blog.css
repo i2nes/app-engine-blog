@@ -38,6 +38,9 @@ blockquote {
   font-style: italic;
   color: #777777; }
 
+pre code {
+  font-size: 14px; }
+
 .section-heading {
   font-size: 36px;
   font-weight: 700;
