@@ -1,5 +1,9 @@
 # Run 'pip install -r requirements.txt -t lib/' to install these packages
 # in `lib/` subdirectory. It is added to `sys.path` by `appengine_config.py`.
+#
+# Note: I get a filename error uploading to app engine, but it doesn't seem to cause any issue.
+# ERROR appcfg.py:1867 Invalid character in filename: lib/setuptools/script (dev).tmpl
+#
 Flask==0.10.1
 Flask-WTF==0.13.1
 py-gfm==0.1.3
