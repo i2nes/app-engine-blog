@@ -57,7 +57,9 @@ def post(slug):
             extensions=[GithubFlavoredMarkdownExtension()])
         context['created'] = query[0].created
 
-        context['content'] = markdown.markdown(query[0].content, extensions=[GithubFlavoredMarkdownExtension()])
+        # TODO: Find a way of doing this better with css or in the markdown.
+        # Adding the "img-fluid" class for having responsive images
+        context['content'] = context['content'].replace('<img', '<img class="img-fluid"')
     else:
         abort(404)
 
