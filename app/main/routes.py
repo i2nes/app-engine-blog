@@ -1,7 +1,10 @@
 from . import app
-from flask import render_template
+from flask import render_template, abort
 from config import blog_config
 from app.models import Article
+from google.appengine.ext import ndb
+import markdown
+from mdx_gfm import GithubFlavoredMarkdownExtension
 
 
 @app.route('/')
@@ -37,12 +40,26 @@ def contact():
     return render_template('main/contact_page.html', context=context, blog_config=blog_config)
 
 
-@app.route('post/')
-def post():
+@app.route('blog/<slug>')
+def post(slug):
 
     context = {
         'title': 'Post Page',
     }
+
+    query = Article.query(ndb.AND(Article.slug == slug, Article.published == True)).fetch(1)
+
+    if query:
+        context['post_title_1'] = query[0].title1
+        context['post_title_2'] = query[0].title2
+        context['content'] = markdown.markdown(
+            query[0].content,
+            extensions=[GithubFlavoredMarkdownExtension()])
+        context['created'] = query[0].created
+
+        context['content'] = markdown.markdown(query[0].content, extensions=[GithubFlavoredMarkdownExtension()])
+    else:
+        abort(404)
 
     return render_template('main/post_page.html', context=context, blog_config=blog_config)
 

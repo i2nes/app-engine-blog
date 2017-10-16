@@ -2,3 +2,4 @@
 # in `lib/` subdirectory. It is added to `sys.path` by `appengine_config.py`.
 Flask==0.10.1
 Flask-WTF==0.13.1
+py-gfm==0.1.3
