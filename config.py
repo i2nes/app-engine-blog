@@ -16,6 +16,7 @@ blog_config = {
     'COPYRIGHT': 'Your Website 2017',
     'POST_AUTHOR': 'Start Bootstrap',
     'POST_AUTHOR_LINK': '#',
+    'POSTS_LIST_LIMIT': 5,
 
     # Comment out any social links you don't want to display
     'FACEBOOK_LINK': 'https://www.facebook.com/',

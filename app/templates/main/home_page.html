@@ -38,7 +38,10 @@ url({{ url_for('static', filename='img/home-bg.jpg') }})
 
             <!-- Pager -->
             <div class="clearfix">
-                <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+                {% if context['previous_page'] %}
+                <a class="btn btn-secondary float-left" href="{{ url_for('main.home', page_id=context['previous_page']) }}">&larr; Previous</a>
+                {% endif %}
+                <a class="btn btn-secondary float-right" href="{{ url_for('main.home', page_id=context['next_page']) }}">Next &rarr;</a>
             </div>
         </div>
     </div>
