@@ -14,7 +14,7 @@ def home():
         'title': 'Clean Blog - Start Bootstrap Theme',
     }
 
-    q = Article.query().order(-Article.created)
+    q = Article.query(Article.published == True).order(-Article.created)
     posts = q.fetch()
 
     return render_template('main/home_page.html', context=context, blog_config=blog_config, posts=posts)
