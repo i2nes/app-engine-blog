@@ -5,6 +5,7 @@ from app.models import Article
 from google.appengine.ext import ndb
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
+import logging
 
 
 @app.route('/')
@@ -68,7 +69,13 @@ def post(slug):
         'title': 'Post Page',
     }
 
-    query = Article.query(ndb.AND(Article.slug == slug, Article.published == True)).fetch(1)
+    query = Article.query(ndb.AND(Article.slug == slug, Article.published == True))
+    query = query.fetch()
+
+    # Our URL slugging has no validation. Similar article titles may create duplicates.
+    # All we are doing is logging a warning so that monitor and manually change duplicated slugs.
+    if len(query) > 1:
+        logging.warn('Duplicate Slug "{}". You should rename one of them to fix this issue'.format(slug))
 
     if query:
         context['post_title_1'] = query[0].title1

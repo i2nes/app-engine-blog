@@ -6,8 +6,7 @@ from wtforms.validators import DataRequired
 class CreateArticleLoginForm(FlaskForm):
 
     title1 = StringField('Title 1', validators=[DataRequired()])
-    title2 = StringField('Title 2', validators=[DataRequired()])
-    slug = StringField('Slug', validators=[DataRequired()])
+    title2 = StringField('Title 2')
     content = TextAreaField()
     status = SelectField(
         'Status',

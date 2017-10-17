@@ -7,6 +7,8 @@ from functools import wraps
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from socket import gethostname
+import unicodedata
+import re
 
 
 # Functions
@@ -35,6 +37,14 @@ def logout_url():
     else:
         logout = '/_ah/logout?continue=https://' + gethostname() + '/'
     return logout
+
+
+def slugify(s):
+    slug = unicodedata.normalize('NFKD', s)
+    slug = slug.encode('ascii', 'ignore').lower()
+    slug = re.sub(r'[^a-z0-9]+', '-', slug).strip('-')
+    slug = re.sub(r'[-]+', '-', slug)
+    return slug
 
 
 # Editor Routes
@@ -73,7 +83,7 @@ def create_article():
 
         new_article.title1 = form.title1.data
         new_article.title2 = form.title2.data
-        new_article.slug = form.slug.data
+        new_article.slug = slugify(form.title1.data)
         new_article.content = form.content.data
         new_article.published = True if form.status.data == 'published' else False
 
