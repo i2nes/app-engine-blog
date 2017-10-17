@@ -30,7 +30,7 @@ url({{ url_for('static', filename='img/home-bg.jpg') }})
                     </h3>
                 </a>
                 <p class="post-meta">Posted by
-                    <a href="{{ blog_config['POST_AUTHOR_LINK'] }}">{{ blog_config['POST_AUTHOR'] }}</a>
+                    <a href="{{ blog_config['POST_AUTHOR_LINK'] }}">{{ post['author'] }}</a>
                     on {{ post['created'].date().strftime("%A %d, %B %Y") }}</p>
             </div>
             <hr>

@@ -10,7 +10,7 @@ url({{ url_for('static', filename='img/post-bg.jpg') }})
 <div class="post-heading">
     <h1>{{ context['post_title_1'] }}</h1>
     <h2 class="subheading">{{ context['post_title_2'] }}</h2>
-    <span class="meta">Posted by <a href="#">Start Bootstrap</a> on {{ context['created'].date().strftime("%A %d, %B %Y") }}</span>
+    <span class="meta">Posted by <a href="#">{{ context['post_author'] }}</a> on {{ context['created'].date().strftime("%A %d, %B %Y") }}</span>
 </div>
 {% endblock %}
 

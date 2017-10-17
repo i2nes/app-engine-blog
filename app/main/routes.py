@@ -80,6 +80,7 @@ def post(slug):
     if query:
         context['post_title_1'] = query[0].title1
         context['post_title_2'] = query[0].title2
+        context['post_author'] = query[0].author
         context['content'] = markdown.markdown(
             query[0].content,
             extensions=[GithubFlavoredMarkdownExtension()])

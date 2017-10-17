@@ -72,6 +72,8 @@ def home():
 @login_required
 def create_article():
 
+    user = users.get_current_user()
+
     context = {
         'logout_url': logout_url(),
     }
@@ -83,6 +85,7 @@ def create_article():
 
         new_article.title1 = form.title1.data
         new_article.title2 = form.title2.data
+        new_article.author = blog_config['EDITOR_ACCESS_LIST'][user.email()]
         new_article.slug = slugify(form.title1.data)
         new_article.content = form.content.data
         new_article.published = True if form.status.data == 'published' else False
