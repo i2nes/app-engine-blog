@@ -5,10 +5,11 @@ from forms import CreateArticleLoginForm
 from app.models import Article
 from functools import wraps
 from google.appengine.api import users
+from google.appengine.ext import ndb
 from socket import gethostname
 
-# Functions
 
+# Functions
 def login_required(f):
 
     @wraps(f)
@@ -44,7 +45,15 @@ def home():
 
     context = {
         'logout_url': logout_url(),
+        'title': 'Editor Home Page',
     }
+
+    query = Article.query().order(-Article.created)
+
+    if query:
+        context['posts'] = query.fetch()
+    else:
+        pass
 
     return render_template('editor/home_page.html', context=context, blog_config=blog_config)
 

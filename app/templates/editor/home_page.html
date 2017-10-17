@@ -19,6 +19,28 @@ url({{ url_for('static', filename='img/home-bg.jpg') }})
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
 
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Title</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Published</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in context['posts'] %}
+                <tr>
+                    <td>{{ post['key'] }}</td>
+                    <td>{{ post['title1'] }}</td>
+                    <td>{{ post['created'] }}</td>
+                    <td>{{ post['updated'] }}</td>
+                    <td>{{ post['published'] }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
         </div>
     </div>
