@@ -23,7 +23,7 @@ def create_app(config_name):
 
     # Query for content in the Datastore
     query = Article.query().order(-Article.created)
-    results = query.fetch(2)
+    results = query.fetch(1)
 
     logging.info('Checking if any posts exist: {} found'.format(len(results)))
 
