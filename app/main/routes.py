@@ -49,6 +49,17 @@ def about():
         'title': 'About Page',
     }
 
+    query = Article.query().order(Article.created)
+    results = query.fetch(2)
+
+    for result in results:
+        if result.title1 == 'about_page':
+            context['content'] = markdown.markdown(
+                result.content,
+                extensions=[GithubFlavoredMarkdownExtension()])
+        else:
+            logging.warn('About page content not found!')
+
     return render_template('main/about_page.html', context=context, blog_config=blog_config)
 
 
@@ -58,6 +69,18 @@ def contact():
     context = {
         'title': 'Contact Page',
     }
+
+    query = Article.query().order(Article.created)
+    results = query.fetch(2)
+
+    for result in results:
+        if result.title1 == 'contact_page':
+            context['content'] = markdown.markdown(
+                result.content,
+                extensions=[GithubFlavoredMarkdownExtension()])
+        else:
+            logging.warn('Contact page content not found!')
+
 
     return render_template('main/contact_page.html', context=context, blog_config=blog_config)
 

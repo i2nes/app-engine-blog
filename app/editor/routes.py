@@ -5,7 +5,6 @@ from forms import CreateArticleLoginForm
 from app.models import Article
 from functools import wraps
 from google.appengine.api import users
-from google.appengine.ext import ndb
 from socket import gethostname
 import unicodedata
 import re
