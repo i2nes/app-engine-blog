@@ -34,12 +34,14 @@ def create_app(config_name):
 
         about_page = Article()
         about_page.title1 = 'about_page'
+        about_page.slug = 'about-page'
         about_page.author = ''
         about_page.content = 'About page'
         about_page.published = False
 
         contact_page = Article()
         contact_page.title1 = 'contact_page'
+        contact_page.slug = 'contact-page'
         contact_page.author = ''
         contact_page.content = 'Contact page'
         contact_page.published = False

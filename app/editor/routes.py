@@ -1,13 +1,14 @@
 from . import app
 from flask import render_template, url_for, redirect
 from config import blog_config, config
-from forms import CreateArticleLoginForm
+from forms import CreateArticleLoginForm, EditArticleLoginForm
 from app.models import Article
 from functools import wraps
 from google.appengine.api import users
 from socket import gethostname
 import unicodedata
 import re
+import logging
 
 
 # Functions
@@ -67,7 +68,7 @@ def home():
     return render_template('editor/home_page.html', context=context, blog_config=blog_config)
 
 
-@app.route('/create', methods=['GET', 'POST'])
+@app.route('/create/', methods=['GET', 'POST'])
 @login_required
 def create_article():
 
@@ -78,6 +79,7 @@ def create_article():
     }
 
     form = CreateArticleLoginForm()
+
     if form.validate_on_submit():
 
         new_article = Article()
@@ -91,10 +93,53 @@ def create_article():
 
         new_article.put()
 
-        return redirect(url_for('main.home'))
+        return redirect(url_for('editor.home'))
 
     else:
         pass
 
     return render_template('editor/create_article_page.html', context=context, form=form, blog_config=blog_config)
 
+
+@app.route('/edit/<int:article_id>/', methods=['GET', 'POST'])
+@login_required
+def edit_article(article_id):
+
+    user = users.get_current_user()
+
+    context = {
+        'logout_url': logout_url(),
+    }
+
+    article = Article.get_by_id(article_id, parent=None)
+
+    if not article:
+        logging.info('Can not find article {} to edit'.format(article_id))
+        return redirect(url_for('editor.home'))
+    else:
+        context['article_id'] = article_id
+
+    form = EditArticleLoginForm()
+
+    if form.validate_on_submit():
+
+        article.title1 = form.title1.data
+        article.title2 = form.title2.data
+        article.slug = form.slug.data
+        article.content = form.content.data
+        article.published = True if form.status.data == 'published' else False
+
+        article.put()
+
+        return redirect(url_for('editor.home'))
+
+    else:
+
+        # Load post data from Datastore
+        form.title1.data = article.title1
+        form.title2.data = article.title2
+        form.slug.data = article.slug
+        form.content.data = article.content
+        form.status.data = 'published' if article.published == True else 'draft'
+
+    return render_template('editor/edit_article_page.html', context=context, form=form, blog_config=blog_config)

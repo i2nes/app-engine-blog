@@ -77,7 +77,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form" method="POST" action="{{ url_for('editor.create_article') }}">
+                    <form class="form" method="POST" action="{{ url_for('editor.edit_article', article_id=context['article_id']) }}">
                         <div class="form-group">
 
                             {% for item in form %}

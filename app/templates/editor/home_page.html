@@ -100,7 +100,7 @@
               <tbody>
                 {% for post in context['posts'] %}
                 <tr>
-                    <td>{{ post['key'] }}</td>
+                    <td><a href="{{ url_for('editor.edit_article', article_id=post['key'].id()) }}">{{ post['key'].id() }}</a></td>
                     <td>{{ post['title1'] }}</td>
                     <td>{{ post['slug'] }}</td>
                     <td>{{ post['created'] }}</td>
