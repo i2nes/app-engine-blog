@@ -1,11 +1,12 @@
 from . import app
-from flask import render_template, abort
+from flask import render_template, abort, redirect, url_for
 from config import blog_config
-from app.models import Article
+from app.models import Article, ContactMessage
 from google.appengine.ext import ndb
 import markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
 import logging
+from forms import ContactLoginForm
 
 
 @app.route('/')
@@ -63,7 +64,7 @@ def about():
     return render_template('main/about_page.html', context=context, blog_config=blog_config)
 
 
-@app.route('contact/')
+@app.route('contact/', methods=['GET', 'POST'])
 def contact():
 
     context = {
@@ -81,8 +82,24 @@ def contact():
         else:
             logging.warn('Contact page content not found!')
 
+    form = ContactLoginForm()
 
-    return render_template('main/contact_page.html', context=context, blog_config=blog_config)
+    if form.validate_on_submit():
+
+        msg = ContactMessage()
+
+        msg.name = form.name.data
+        msg.email = form.email.data
+        msg.message = form.message.data
+
+        msg.put()
+
+        return redirect(url_for('main.contact'))
+
+    else:
+        pass
+
+    return render_template('main/contact_page.html', context=context, form=form, blog_config=blog_config)
 
 
 @app.route('blog/<slug>')

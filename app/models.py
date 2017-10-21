@@ -11,3 +11,24 @@ class Article(ndb.Model):
     published = ndb.BooleanProperty(default=False)
     created = ndb.DateTimeProperty(auto_now_add=True)
     updated = ndb.DateTimeProperty(auto_now=True)
+
+
+class ImageFile(ndb.Model):
+
+    img = ndb.BlobProperty()
+    title = ndb.StringProperty()
+    url = ndb.StringProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
+
+
+class ContactMessage(ndb.Model):
+
+    name = ndb.StringProperty()
+    email = ndb.StringProperty()
+    message = ndb.TextProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
+
+
+
