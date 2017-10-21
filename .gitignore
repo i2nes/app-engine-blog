@@ -18,3 +18,11 @@ lib/
 
 # Local Configurations
 config.py
+
+# Track only initial images
+app/static/img/*
+!app/static/img/about-bg.jpg
+!app/static/img/contact-bg.jpg
+!app/static/img/home-bg.jpg
+!app/static/img/post-bg.jpg
+!app/static/img/post-sample-image.jpg

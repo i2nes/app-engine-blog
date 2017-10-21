@@ -2,7 +2,7 @@ from . import app
 from flask import render_template, url_for, redirect
 from config import blog_config, config
 from forms import CreateArticleLoginForm, EditArticleLoginForm
-from app.models import Article
+from app.models import Article, ContactMessage
 from functools import wraps
 from google.appengine.api import users
 from socket import gethostname
@@ -66,6 +66,25 @@ def home():
         pass
 
     return render_template('editor/home_page.html', context=context, blog_config=blog_config)
+
+
+@app.route('/messages/')
+@login_required
+def messages_page():
+
+    context = {
+        'logout_url': logout_url(),
+        'title': 'Editor Messages',
+    }
+
+    query = ContactMessage().query().order(-Article.created)
+
+    if query:
+        context['messages'] = query.fetch()
+    else:
+        pass
+
+    return render_template('editor/messages_page.html', context=context, blog_config=blog_config)
 
 
 @app.route('/create/', methods=['GET', 'POST'])
