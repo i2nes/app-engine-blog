@@ -143,3 +143,15 @@ def edit_article(article_id):
         form.status.data = 'published' if article.published == True else 'draft'
 
     return render_template('editor/edit_article_page.html', context=context, form=form, blog_config=blog_config)
+
+
+@app.route('/gallery')
+@login_required
+def thumbnails():
+
+    context = {
+        'logout_url': logout_url(),
+        'title': 'Thumbnail Gallery',
+    }
+
+    return render_template('editor/image_gallery_page.html', context=context, blog_config=blog_config)
