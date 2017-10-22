@@ -27,3 +27,4 @@ app/static/img/*
 !app/static/img/home-bg.jpg
 !app/static/img/post-bg.jpg
 !app/static/img/post-sample-image.jpg
+!app/static/img/favicon.ico
