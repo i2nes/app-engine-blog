@@ -16,8 +16,9 @@ Thumbs.db
 # Python Requirements Installs
 lib/
 
-# Local Configurations
-config.py
+# Track only example Configurations
+config*
+!config_rename.py
 
 # Track only initial images
 app/static/img/*

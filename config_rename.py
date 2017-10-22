@@ -21,6 +21,12 @@ blog_config = {
     'POST_AUTHOR_LINK': '#',
     'POSTS_LIST_LIMIT': 5,
 
+    # Blog Images
+    'IMG_ABOUT': 'img/about-bg.jpg',
+    'IMG_CONTACT': 'img/contact-bg.jpg',
+    'IMG_HOME': 'img/home-bg.jpg',
+    'IMG_POST': 'img/post-bg.jpg',
+
     # Comment out any social links you don't want to display
     'FACEBOOK_LINK': 'https://www.facebook.com/',
     'TWITTER_LINK': 'https://twitter.com/',
