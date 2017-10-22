@@ -14,7 +14,8 @@ from forms import ContactLoginForm
 def home(page_id=1):
 
     context = {
-        'title': 'Clean Blog - Start Bootstrap Theme',
+        'title': blog_config['HOME_SEO_TITLE'],
+        'meta_description': blog_config['HOME_SEO_DESCRIPTION'],
     }
 
     if page_id < 1:
