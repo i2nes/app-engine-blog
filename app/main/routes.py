@@ -106,7 +106,6 @@ def contact():
 def post(slug):
 
     context = {
-        'title': 'Post Page',
     }
 
     query = Article.query(ndb.AND(Article.slug == slug, Article.published == True))
@@ -121,6 +120,8 @@ def post(slug):
         context['post_title_1'] = query[0].title1
         context['post_title_2'] = query[0].title2
         context['post_author'] = query[0].author
+        context['title'] = query[0].seo_title
+        context['meta_description'] = query[0].seo_description
         context['content'] = markdown.markdown(
             query[0].content,
             extensions=[GithubFlavoredMarkdownExtension()])

@@ -7,6 +7,8 @@ class Article(ndb.Model):
     title2 = ndb.StringProperty()
     author = ndb.StringProperty()
     slug = ndb.StringProperty()
+    seo_title = ndb.StringProperty()
+    seo_description = ndb.StringProperty()
     content = ndb.TextProperty()
     published = ndb.BooleanProperty(default=False)
     created = ndb.DateTimeProperty(auto_now_add=True)

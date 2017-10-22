@@ -105,6 +105,8 @@ def create_article():
 
         new_article.title1 = form.title1.data
         new_article.title2 = form.title2.data
+        new_article.seo_title = form.seo_title.data
+        new_article.seo_description = form.seo_description.data
         new_article.author = blog_config['EDITOR_ACCESS_LIST'][user.email()]
         new_article.slug = slugify(form.title1.data)
         new_article.content = form.content.data
@@ -144,6 +146,8 @@ def edit_article(article_id):
 
         article.title1 = form.title1.data
         article.title2 = form.title2.data
+        article.seo_title = form.seo_title.data
+        article.seo_description = form.seo_description.data
         article.slug = form.slug.data
         article.content = form.content.data
         article.published = True if form.status.data == 'published' else False
@@ -157,6 +161,8 @@ def edit_article(article_id):
         # Load post data from Datastore
         form.title1.data = article.title1
         form.title2.data = article.title2
+        form.seo_title.data = article.seo_title
+        form.seo_description.data = article.seo_description
         form.slug.data = article.slug
         form.content.data = article.content
         form.status.data = 'published' if article.published == True else 'draft'
