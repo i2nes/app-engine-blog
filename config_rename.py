@@ -31,6 +31,8 @@ blog_config = {
     'FACEBOOK_LINK': 'https://www.facebook.com/',
     'TWITTER_LINK': 'https://twitter.com/',
     'GITHUB_LINK': 'https://github.com/i2nes/app-engine-blog',
+    'LINKEDIN_LINK': 'https://www.linkedin.com/',
+    'INSTAGRAM_LINK': 'https://www.instagram.com/',
 
     # Authorized Gmail Accounts
     # Only these users will be able to access /editor for editing posts

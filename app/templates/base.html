@@ -114,6 +114,28 @@
                     </li>
                     {% endif %}
 
+                    {% if blog_config['LINKEDIN_LINK'] %}
+                    <li class="list-inline-item">
+                        <a href="{{ blog_config['GITHUB_LINK'] }}">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if blog_config['INSTAGRAM_LINK'] %}
+                    <li class="list-inline-item">
+                        <a href="{{ blog_config['GITHUB_LINK'] }}">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
                 </ul>
                 <p class="copyright text-muted">Copyright &copy; {{ blog_config['COPYRIGHT'] }}</p>
             </div>
