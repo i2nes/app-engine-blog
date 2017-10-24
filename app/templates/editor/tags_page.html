@@ -45,16 +45,10 @@
             <span class="nav-link-text">Datastore Console</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Google Cloud Storage">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Datastore Console">
           <a class="nav-link" href="https://console.cloud.google.com/storage/browser" target="_blank">
             <i class="fa fa-fw fa-link"></i>
             <span class="nav-link-text">Google Cloud Storage</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tags">
-          <a class="nav-link" href="{{ url_for('editor.tags_page') }}" target="_blank">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Tags</span>
           </a>
         </li>
       </ul>
@@ -82,49 +76,10 @@
         <li class="breadcrumb-item active">My Dashboard</li>
       </ol>
 
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-table"></i> Article Listing</div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Key</th>
-                  <th>Title</th>
-                  <th>Slug</th>
-                  <th>Created</th>
-                  <th>Updated</th>
-                  <th>Published</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Key</th>
-                  <th>Title</th>
-                  <th>Slug</th>
-                  <th>Created</th>
-                  <th>Updated</th>
-                  <th>Published</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {% for post in context['posts'] %}
-                <tr>
-                    <td><a href="{{ url_for('editor.edit_article', article_id=post['key'].id()) }}">{{ post['key'].id() }}</a></td>
-                    <td>{{ post['title1'] }}</td>
-                    <td>{{ post['slug'] }}</td>
-                    <td>{{ post['created'] }}</td>
-                    <td>{{ post['updated'] }}</td>
-                    <td>{{ post['published'] }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      {% for tag in context['tags'] %}
+      <button type="button" class="btn btn-info">{{ tag }}</button>
+      {% endfor %}
+
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

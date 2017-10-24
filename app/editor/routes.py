@@ -110,8 +110,11 @@ def create_article():
         new_article.author = blog_config['EDITOR_ACCESS_LIST'][user.email()]
         new_article.slug = slugify(form.title1.data)
         new_article.content = form.content.data
+        tags = form.tags.data
+        tags = tags.lower()
+        tags = tags.split()
+        new_article.tags = tags
         new_article.published = True if form.status.data == 'published' else False
-
         new_article.put()
 
         return redirect(url_for('editor.home'))
@@ -150,6 +153,10 @@ def edit_article(article_id):
         article.seo_description = form.seo_description.data
         article.slug = form.slug.data
         article.content = form.content.data
+        tags = form.tags.data
+        tags = tags.lower()
+        tags = tags.split()
+        article.tags = tags
         article.published = True if form.status.data == 'published' else False
 
         article.put()
@@ -165,6 +172,8 @@ def edit_article(article_id):
         form.seo_description.data = article.seo_description
         form.slug.data = article.slug
         form.content.data = article.content
+        tags = article.tags
+        form.tags.data = ' '.join(tags)
         form.status.data = 'published' if article.published == True else 'draft'
 
     return render_template('editor/edit_article_page.html', context=context, form=form, blog_config=blog_config)
@@ -180,3 +189,20 @@ def thumbnails():
     }
 
     return render_template('editor/image_gallery_page.html', context=context, blog_config=blog_config)
+
+
+@app.route('/tags')
+@login_required
+def tags_page():
+
+    context = {
+        'logout_url': logout_url(),
+        'title': 'Tags',
+    }
+
+    query = Article.query()
+    articles = query.fetch(20, projection=[Article.tags])
+    tags = [article.tags[0] for article in articles]
+    context['tags'] = list(set(tags))
+
+    return render_template('editor/tags_page.html', context=context, blog_config=blog_config)

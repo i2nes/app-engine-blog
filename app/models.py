@@ -6,6 +6,7 @@ class Article(ndb.Model):
     title1 = ndb.StringProperty()
     title2 = ndb.StringProperty()
     author = ndb.StringProperty()
+    tags = ndb.StringProperty(repeated=True)
     slug = ndb.StringProperty()
     seo_title = ndb.StringProperty()
     seo_description = ndb.StringProperty()

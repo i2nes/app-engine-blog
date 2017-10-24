@@ -155,3 +155,20 @@ def page_not_found(e):
     }
 
     return render_template('main/500.html', context=context, blog_config=blog_config), 500
+
+
+@app.route('tag/<tag>')
+def tag_article_page(tag):
+
+    context = {
+        'title': 'Tags Page',
+        'meta_description': 'Tags page',
+    }
+
+    q = Article.query(ndb.AND(Article.published == True, Article.tags == tag)).order(-Article.created)
+    posts = q.fetch()
+
+    if posts:
+        return render_template('main/tags_page.html', context=context, blog_config=blog_config, posts=posts)
+    else:
+        abort(404)

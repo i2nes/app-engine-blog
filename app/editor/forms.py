@@ -10,6 +10,7 @@ class CreateArticleLoginForm(FlaskForm):
     seo_title = StringField('SEO Title')
     seo_description = StringField('SEO Description')
     content = TextAreaField()
+    tags = StringField('Tags')
     status = SelectField(
         'Status',
         choices=[('draft', 'Draft'), ('published', 'Published')]
@@ -24,6 +25,7 @@ class EditArticleLoginForm(FlaskForm):
     seo_title = StringField('SEO Title')
     seo_description = StringField('SEO Description')
     content = TextAreaField()
+    tags = StringField('Tags')
     status = SelectField(
         'Status',
         choices=[('draft', 'Draft'), ('published', 'Published')]
