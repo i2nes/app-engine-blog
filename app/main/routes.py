@@ -38,6 +38,10 @@ def home(page_id=1):
     q = Article.query(Article.published == True).order(-Article.created)
     posts = q.fetch(offset=offset, limit=blog_config['POSTS_LIST_LIMIT'])
 
+    # Check if there are any more posts for the next page
+    if not q.fetch(offset=offset+blog_config['POSTS_LIST_LIMIT'], limit=1):
+        context['next_page'] = None
+
     if posts:
         return render_template('main/home_page.html', context=context, blog_config=blog_config, posts=posts)
     else:
