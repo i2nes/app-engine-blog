@@ -146,19 +146,23 @@ def page_not_found(e):
 
     context = {
         'title': 'Page Not Found',
+        'error_type': 'Page Not Found',
+        'error_message': 'Sorry, We can\'t seem to fine what you\'re looking for.',
     }
 
-    return render_template('main/404.html', context=context, blog_config=blog_config), 404
+    return render_template('main/error_page.html', context=context, blog_config=blog_config), 404
 
 
 @app.app_errorhandler(500)
-def page_not_found(e):
+def server_error(e):
 
     context = {
         'title': 'Server Error',
+        'error_type': 'Server Error',
+        'error_message': 'Well, this is unexpected...',
     }
 
-    return render_template('main/500.html', context=context, blog_config=blog_config), 500
+    return render_template('main/error_page.html', context=context, blog_config=blog_config), 500
 
 
 @app.route('tag/<tag>')

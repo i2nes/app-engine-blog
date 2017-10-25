@@ -18,8 +18,8 @@ url({{ url_for('static', filename=blog_config['IMG_HOME']) }})
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <h2>Page not found</h2>
-            <p>Sorry, We can't seem to fine what you're looking for.</p>
+            <h2>{{ context['error_type'] }}</h2>
+            <p>{{ context['error_message'] }}</p>
             <p>Try going to our to <a href="{{ url_for('main.home')}}">home page</a></p>
         </div>
     </div>
