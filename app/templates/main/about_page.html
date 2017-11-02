@@ -8,8 +8,8 @@ url({{ url_for('static', filename=blog_config['IMG_ABOUT']) }})
 
 {% block site_heading %}
 <div class="page-heading">
-    <h1>About Me</h1>
-    <span class="subheading">This is what I do.</span>
+    <h1>{{ context['title1'] }}</h1>
+    <span class="subheading">{{ context['title2'] }}</span>
 </div>
 {% endblock %}
 

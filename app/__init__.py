@@ -5,10 +5,12 @@ import logging
 
 def create_app(config_name):
 
-    logging.info('Getting ready to launch the Flask App')
+    logging.info('STARTUP: Getting ready to launch the Flask App')
 
     app = Flask(__name__)
     app.config.update(config_name)
+
+    # Register blueprints
 
     from .main import app as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')
@@ -16,40 +18,44 @@ def create_app(config_name):
     from .editor import app as editor_blueprint
     app.register_blueprint(editor_blueprint, url_prefix='/editor')
 
-    # If no Datastore entity has been created yet, in other words,
-    # if the blog app was never run, we'll create the first two entities
-    # The first two entities will be used for the about and contact
-    # pages content.
+    # Add Contact and About pages to the datastore when first launching the blog
 
-    # Query for content in the Datastore
-    query = Article.query().order(-Article.created)
-    results = query.fetch(1)
+    # Contact page creation
+    query = Article.query(Article.slug == 'contact-page')
+    result = query.fetch(1)
 
-    logging.info('Checking if any posts exist: {} found'.format(len(results)))
-
-    # If no content exists, we'll create the first entries
-    if not results:
-
-        logging.info('No content found. Creating default About and Contact Pages.')
-
-        about_page = Article()
-        about_page.title1 = 'about_page'
-        about_page.slug = 'about-page'
-        about_page.author = ''
-        about_page.content = 'About page'
-        about_page.published = False
-
+    if result:
+        logging.info('STARTUP: Contact page exists')
+    else:
+        logging.info('STARTUP: Creating a contact page')
         contact_page = Article()
-        contact_page.title1 = 'contact_page'
+        contact_page.title1 = 'Contact Me'
+        contact_page.title2 = 'Have questions? I have answers (maybe).'
         contact_page.slug = 'contact-page'
         contact_page.author = ''
-        contact_page.content = 'Contact page'
+        contact_page.content = 'Want to get in touch with me? Fill out the form below to send me a message and I ' \
+                               'will try to get back to you within 24 hours! '
         contact_page.published = False
-
-        about_page.put()
         contact_page.put()
 
+    # About page creation
+    query = Article.query(Article.slug == 'about-page')
+    result = query.fetch(1)
+
+    if result:
+        logging.info('STARTUP: About page exists')
+    else:
+        logging.info('STARTUP: Creating an about page')
+        about_page = Article()
+        about_page.title1 = 'About Me'
+        about_page.title2 = 'This is what I do.'
+        about_page.slug = 'about-page'
+        about_page.author = ''
+        about_page.content = ''
+        about_page.published = False
+        about_page.put()
+
     # Startup complete
-    logging.info('READY TO ROCK!!!')
+    logging.info('STARTUP: READY TO ROCK!!!')
 
     return app

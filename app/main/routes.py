@@ -52,19 +52,20 @@ def home(page_id=1):
 def about():
 
     context = {
-        'title': 'About Page',
     }
 
-    query = Article.query().order(Article.created)
-    results = query.fetch(2)
+    query = Article.query(Article.slug == 'about-page')
+    result = query.fetch(1)
 
-    for result in results:
-        if result.title1 == 'about_page':
-            context['content'] = markdown.markdown(
-                result.content,
-                extensions=[GithubFlavoredMarkdownExtension()])
-        else:
-            logging.warn('About page content not found!')
+    if result:
+        context['title'] = result[0].title1
+        context['title1'] = result[0].title1
+        context['title2'] = result[0].title2
+        context['content'] = markdown.markdown(
+            result[0].content,
+            extensions=[GithubFlavoredMarkdownExtension()])
+    else:
+        logging.error('About page not found!')
 
     return render_template('main/about_page.html', context=context, blog_config=blog_config)
 
@@ -73,36 +74,31 @@ def about():
 def contact():
 
     context = {
-        'title': 'Contact Page',
     }
 
-    query = Article.query().order(Article.created)
-    results = query.fetch(2)
+    query = Article.query(Article.slug == 'contact-page')
+    result = query.fetch(1)
 
-    for result in results:
-        if result.title1 == 'contact_page':
-            context['content'] = markdown.markdown(
-                result.content,
-                extensions=[GithubFlavoredMarkdownExtension()])
-        else:
-            logging.warn('Contact page content not found!')
+    if result:
+        context['title'] = result[0].title1
+        context['title1'] = result[0].title1
+        context['title2'] = result[0].title2
+        context['content'] = markdown.markdown(
+            result[0].content,
+            extensions=[GithubFlavoredMarkdownExtension()])
+    else:
+        logging.error('Contact page not found!')
 
     form = ContactLoginForm()
 
     if form.validate_on_submit():
 
         msg = ContactMessage()
-
         msg.name = form.name.data
         msg.email = form.email.data
         msg.message = form.message.data
-
         msg.put()
-
         return redirect(url_for('main.contact'))
-
-    else:
-        pass
 
     return render_template('main/contact_page.html', context=context, form=form, blog_config=blog_config)
 
