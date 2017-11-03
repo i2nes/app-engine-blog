@@ -1,6 +1,14 @@
 from google.appengine.ext import ndb
 
 
+class Feature(ndb.Model):
+
+    title = ndb.StringProperty()
+    value = ndb.StringProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
+
+
 class Article(ndb.Model):
 
     title1 = ndb.StringProperty()
@@ -30,6 +38,14 @@ class ContactMessage(ndb.Model):
     name = ndb.StringProperty()
     email = ndb.StringProperty()
     message = ndb.TextProperty()
+    created = ndb.DateTimeProperty(auto_now_add=True)
+    updated = ndb.DateTimeProperty(auto_now=True)
+
+
+class User(ndb.Model):
+
+    name = ndb.StringProperty()
+    email = ndb.StringProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
     updated = ndb.DateTimeProperty(auto_now=True)
 
